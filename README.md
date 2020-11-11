@@ -1,4 +1,4 @@
-# cebarco-frontend
+# cebarco-backend
 
 ### Installation
 ```
