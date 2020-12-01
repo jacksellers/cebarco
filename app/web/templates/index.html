@@ -17,5 +17,31 @@ Home
 
 
 {% block content %}
-
+<div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel" data-interval="2500">
+    <div class="carousel-inner">
+        {% for project in projects %}
+            {% if forloop.first %}
+                <div class="carousel-item active">
+            {% else %}
+                <div class="carousel-item">
+            {% endif %}
+                    <img src="{{ project.image.url }}" class="d-block w-100" alt="...">
+                </div>
+        {% endfor %}
+    </div>
+</div>
+<br>
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col-sm">
+            <h3 style="text-align: center;"><b>Bahrain's leading construction and civil engineering company</b></h3>
+        </div>
+    </div>
+</div>
+<style>
+    .navbar {
+        margin-bottom: 0px !important;
+    }
+</style>
 {% endblock %}

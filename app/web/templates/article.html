@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+
+{% block description %}
+
+{% endblock %}
+
+
+{% block title %}
+Article
+{% endblock %}
+
+
+{% block head %}
+
+{% endblock %}
+
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-sm">
+            <h3 style="text-align: center;"><b>{{ article.title }}</b></h3>
+            <p style="text-align: center;"><b>{{ article.date|date:"M Y" }}</b></p>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-sm">
+            <img src="{{ article.image.url }}" class="img-fluid" alt="Responsive image">
+            {% if article.source_link %}
+                <br>
+                <br>
+                <b>Source: <a style="color: blue;" href="{{ article.source_link }}">{{ article.source_name }}</a></b>
+            {% endif %}
+        </div>
+        <div class="col-sm">
+            <p>{{ article.text|linebreaks }}</p>
+        </div>
+    </div>
+</div>
+<br>
+<br>
+{% endblock %}

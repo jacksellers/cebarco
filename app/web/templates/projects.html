@@ -1,0 +1,129 @@
+{% extends "base.html" %}
+
+
+{% block description %}
+
+{% endblock %}
+
+
+{% block title %}
+Projects
+{% endblock %}
+
+
+{% block head %}
+
+{% endblock %}
+
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-sm">
+            <h3 style="text-align: center;"><b>Projects</b></h3>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-sm">
+            <div class="btn-toolbar justify-content-md-center" role="toolbar" aria-label="Toolbar with button groups">
+                <div class="btn-group mr-2" role="group" aria-label="First group">
+                    <button id="btn-all" type="button" class="btn btn-info">All</button>
+                    <button id="btn-building" type="button" class="btn btn-secondary">Building</button>
+                    <button id="btn-infrastructure" type="button" class="btn btn-secondary">Infrastructure</button>
+                </div>
+                <div class="btn-group mr-2" role="group" aria-label="Second group">
+                    <button id="btn-current" type="button" class="btn btn-info">Current</button>
+                    <button id="btn-completed" type="button" class="btn btn-info">Completed</button>
+                </div>
+              </div>
+        </div>
+    </div>
+</div>
+<br>
+<div class="card-columns">
+    {% for project in projects %}
+        <div class="card" data-category="{{ project.category}}" data-date="{{ project.contract_completion|date:'Y-m' }}">
+            <a href="{% url 'web:project' id=project.id %}">
+                <img class="card-img-top" src="{{ project.image.url }}" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">{{ project.title }}</h5>
+                    <p class="card-text"><small class="text-muted">{{ project.contract_completion|date:"M Y" }}</small></p>
+                </div>
+            </a>
+        </div>
+    {% endfor %}
+</div>
+<script>
+    $('button').click(function() {
+        var buttonText = $(this).text();
+        var currentSelected = $("#btn-current").hasClass('btn-info');
+        var completedSelected = $("#btn-completed").hasClass('btn-info');
+        if (buttonText == 'All') {
+            $('#btn-all').attr('class', 'btn btn-info');
+            $('#btn-building').attr('class', 'btn btn-secondary');
+            $('#btn-infrastructure').attr('class', 'btn btn-secondary');
+            $("[data-category='building']").show();
+            $("[data-category='infrastructure']").show();
+        } else if (buttonText == 'Building') {
+            $('#btn-all').attr('class', 'btn btn-secondary');
+            $('#btn-building').attr('class', 'btn btn-info');
+            $('#btn-infrastructure').attr('class', 'btn btn-secondary');
+            $("[data-category='building']").show();
+            $("[data-category='infrastructure']").hide();
+        } else if (buttonText == 'Infrastructure') {
+            $('#btn-all').attr('class', 'btn btn-secondary');
+            $('#btn-building').attr('class', 'btn btn-secondary');
+            $('#btn-infrastructure').attr('class', 'btn btn-info');
+            $("[data-category='building']").hide();
+            $("[data-category='infrastructure']").show();
+        } else if (buttonText == 'Current' && completedSelected) {
+            $('#btn-current').toggleClass('btn-info');
+        } else if (buttonText == 'Completed' && currentSelected) {
+            $('#btn-completed').toggleClass('btn-info');
+        }
+        var buildingSelected = $("#btn-building").hasClass('btn-info');
+        var infrastructureSelected = $("#btn-infrastructure").hasClass('btn-info');
+        currentSelected = $("#btn-current").hasClass('btn-info');
+        completedSelected = $("#btn-completed").hasClass('btn-info');
+        var date = new Date();
+        $('[data-date], [data-category]').filter(function() {
+            var projectDate = new Date($(this).data('date'));
+            if (currentSelected && !completedSelected) {
+                if (buildingSelected) {
+                    return projectDate >= date && $(this).data('category') == 'building';
+                } else if (infrastructureSelected) {
+                    return projectDate >= date && $(this).data('category') == 'infrastructure';
+                } else {
+                    return projectDate >= date;
+                }
+            } else if (!currentSelected && completedSelected) {
+                if (buildingSelected) {
+                    return projectDate <= date && $(this).data('category') == 'building';
+                } else if (infrastructureSelected) {
+                    return projectDate <= date && $(this).data('category') == 'infrastructure';
+                } else {
+                    return projectDate <= date;
+                }
+            } else if (currentSelected && completedSelected) {
+                if (buildingSelected) {
+                    return (projectDate >= date || projectDate <= date) && $(this).data('category') == 'building';
+                } else if (infrastructureSelected) {
+                    return (projectDate >= date || projectDate <= date) && $(this).data('category') == 'infrastructure';
+                } else {
+                    return projectDate >= date || projectDate <= date;
+                }
+            }
+        }).show();
+        $('[data-date]').filter(function() {
+            var projectDate = new Date($(this).data('date'));
+            if (currentSelected && !completedSelected) {
+                return projectDate <= date;
+            } else if (!currentSelected && completedSelected) {
+                return projectDate >= date;
+            }
+        }).hide();
+    });
+</script>
+{% endblock %}

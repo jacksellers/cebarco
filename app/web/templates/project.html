@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+
+{% block description %}
+
+{% endblock %}
+
+
+{% block title %}
+Project
+{% endblock %}
+
+
+{% block head %}
+
+{% endblock %}
+
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-sm">
+            <h3 style="text-align: center;"><b>{{ project.title }}</b></h3>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-sm">
+            <img src="{{ project.image.url }}" class="img-fluid" alt="Responsive image">
+            <br>
+            <br>
+            <div class="google-maps">
+                {{ project.location|safe }}
+            </div>
+        </div>
+        <div class="col-sm">
+            <p>{{ project.text|linebreaks }}</p>
+        </div>
+    </div>
+</div>
+<br>
+<br>
+{% endblock %}
