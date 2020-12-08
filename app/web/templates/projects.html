@@ -32,6 +32,7 @@ Projects
                     <button id="btn-all" type="button" class="btn btn-info">All</button>
                     <button id="btn-building" type="button" class="btn btn-secondary">Building</button>
                     <button id="btn-infrastructure" type="button" class="btn btn-secondary">Infrastructure</button>
+                    <button id="btn-motorsport" type="button" class="btn btn-secondary">Motorsport</button>
                 </div>
                 <div class="btn-group mr-2" role="group" aria-label="Second group">
                     <button id="btn-current" type="button" class="btn btn-info">Current</button>
@@ -45,10 +46,10 @@ Projects
 <div class="card-columns">
     {% for project in projects %}
         <div class="card" data-category="{{ project.category}}" data-date="{{ project.contract_completion|date:'Y-m' }}">
-            <a href="{% url 'web:project' id=project.id %}">
+            <a href="{% url 'web:project' slug=project.slug %}">
                 <img class="card-img-top" src="{{ project.image.url }}" alt="Card image cap">
                 <div class="card-body">
-                    <h5 class="card-title">{{ project.title }}</h5>
+                    <h5 class="card-title">{{ project.name }}</h5>
                     <p class="card-text"><small class="text-muted">{{ project.contract_completion|date:"M Y" }}</small></p>
                 </div>
             </a>
@@ -64,20 +65,34 @@ Projects
             $('#btn-all').attr('class', 'btn btn-info');
             $('#btn-building').attr('class', 'btn btn-secondary');
             $('#btn-infrastructure').attr('class', 'btn btn-secondary');
+            $('#btn-motorsport').attr('class', 'btn btn-secondary');
             $("[data-category='building']").show();
             $("[data-category='infrastructure']").show();
+            $("[data-category='motorsport']").show();
         } else if (buttonText == 'Building') {
             $('#btn-all').attr('class', 'btn btn-secondary');
             $('#btn-building').attr('class', 'btn btn-info');
             $('#btn-infrastructure').attr('class', 'btn btn-secondary');
+            $('#btn-motorsport').attr('class', 'btn btn-secondary');
             $("[data-category='building']").show();
             $("[data-category='infrastructure']").hide();
+            $("[data-category='motorsport']").hide();
         } else if (buttonText == 'Infrastructure') {
             $('#btn-all').attr('class', 'btn btn-secondary');
             $('#btn-building').attr('class', 'btn btn-secondary');
             $('#btn-infrastructure').attr('class', 'btn btn-info');
+            $('#btn-motorsport').attr('class', 'btn btn-secondary');
             $("[data-category='building']").hide();
             $("[data-category='infrastructure']").show();
+            $("[data-category='motorsport']").hide();
+        } else if (buttonText == 'Motorsport') {
+            $('#btn-all').attr('class', 'btn btn-secondary');
+            $('#btn-building').attr('class', 'btn btn-secondary');
+            $('#btn-infrastructure').attr('class', 'btn btn-secondary');
+            $('#btn-motorsport').attr('class', 'btn btn-info');
+            $("[data-category='building']").hide();
+            $("[data-category='infrastructure']").hide();
+            $("[data-category='motorsport']").show();
         } else if (buttonText == 'Current' && completedSelected) {
             $('#btn-current').toggleClass('btn-info');
         } else if (buttonText == 'Completed' && currentSelected) {
@@ -85,6 +100,7 @@ Projects
         }
         var buildingSelected = $("#btn-building").hasClass('btn-info');
         var infrastructureSelected = $("#btn-infrastructure").hasClass('btn-info');
+        var motorsportSelected = $("#btn-motorsport").hasClass('btn-info');
         currentSelected = $("#btn-current").hasClass('btn-info');
         completedSelected = $("#btn-completed").hasClass('btn-info');
         var date = new Date();
@@ -95,6 +111,8 @@ Projects
                     return projectDate >= date && $(this).data('category') == 'building';
                 } else if (infrastructureSelected) {
                     return projectDate >= date && $(this).data('category') == 'infrastructure';
+                } else if (motorsportSelected) {
+                    return projectDate >= date && $(this).data('category') == 'motorsport';
                 } else {
                     return projectDate >= date;
                 }
@@ -103,6 +121,8 @@ Projects
                     return projectDate <= date && $(this).data('category') == 'building';
                 } else if (infrastructureSelected) {
                     return projectDate <= date && $(this).data('category') == 'infrastructure';
+                } else if (motorsportSelected) {
+                    return projectDate <= date && $(this).data('category') == 'motorsport';
                 } else {
                     return projectDate <= date;
                 }
@@ -111,6 +131,8 @@ Projects
                     return (projectDate >= date || projectDate <= date) && $(this).data('category') == 'building';
                 } else if (infrastructureSelected) {
                     return (projectDate >= date || projectDate <= date) && $(this).data('category') == 'infrastructure';
+                } else if (motorsportSelected) {
+                    return (projectDate >= date || projectDate <= date) && $(this).data('category') == 'motorsport';
                 } else {
                     return projectDate >= date || projectDate <= date;
                 }

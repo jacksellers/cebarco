@@ -1,29 +1,42 @@
 from rest_framework import generics
 
-from core.models import Article, Person, Project
-from core.serializers import ArticleSerializer, PersonSerializer, \
-                             ProjectSerializer
+from core.models import Affiliate, Article, Executive, Project
+from core.serializers import AffiliateSerializer, ArticleSerializer, \
+                             ExecutiveSerializer, ProjectSerializer
+
+
+class RetrieveAffiliate(generics.RetrieveAPIView):
+    """Retrieve an affiliate."""
+    serializer_class = AffiliateSerializer
+    lookup_field = 'slug'
+    queryset = Affiliate.objects.all()
 
 
 class RetrieveArticle(generics.RetrieveAPIView):
     """Retrieve an article."""
     serializer_class = ArticleSerializer
-    lookup_field = 'id'
+    lookup_field = 'slug'
     queryset = Article.objects.all()
 
 
-class RetrievePerson(generics.RetrieveAPIView):
-    """Retrieve a person."""
-    serializer_class = PersonSerializer
-    lookup_field = 'id'
-    queryset = Person.objects.all()
+class RetrieveExecutive(generics.RetrieveAPIView):
+    """Retrieve an executive."""
+    serializer_class = ExecutiveSerializer
+    lookup_field = 'slug'
+    queryset = Executive.objects.all()
 
 
 class RetrieveProject(generics.RetrieveAPIView):
     """Retrieve a project."""
     serializer_class = ProjectSerializer
-    lookup_field = 'id'
+    lookup_field = 'slug'
     queryset = Project.objects.all()
+
+
+class ListAffiliates(generics.ListAPIView):
+    """List affiliates."""
+    serializer_class = AffiliateSerializer
+    queryset = Affiliate.objects.all()
 
 
 class ListArticles(generics.ListAPIView):
@@ -32,10 +45,10 @@ class ListArticles(generics.ListAPIView):
     queryset = Article.objects.all()
 
 
-class ListPeople(generics.ListAPIView):
-    """List people."""
-    serializer_class = PersonSerializer
-    queryset = Person.objects.all()
+class ListExecutives(generics.ListAPIView):
+    """List executives."""
+    serializer_class = ExecutiveSerializer
+    queryset = Executive.objects.all()
 
 
 class ListProjects(generics.ListAPIView):

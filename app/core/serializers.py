@@ -1,6 +1,14 @@
 from rest_framework import serializers
 
-from core.models import Article, Person, Project
+from core.models import Affiliate, Article, Executive, Project
+
+
+class AffiliateSerializer(serializers.ModelSerializer):
+    """Serializer for the affiliate object."""
+
+    class Meta:
+        model = Affiliate
+        fields = '__all__'
 
 
 class ArticleSerializer(serializers.ModelSerializer):
@@ -11,11 +19,11 @@ class ArticleSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class PersonSerializer(serializers.ModelSerializer):
-    """Serializer for the person object."""
+class ExecutiveSerializer(serializers.ModelSerializer):
+    """Serializer for the executive object."""
 
     class Meta:
-        model = Person
+        model = Executive
         fields = '__all__'
 
 

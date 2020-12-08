@@ -8,10 +8,11 @@ app_name = 'web'
 
 urlpatterns = [
     path('', views.index, name='index'),
+    path('about/', views.about, name='about'),
     path('projects/', views.projects, name='projects'),
-    path('project/<id>/', views.project, name='project'),
+    path('project/<slug>/', views.project, name='project'),
     path('news/', views.news, name='news'),
-    path('article/<id>/', views.article, name='article'),
+    path('article/<slug>/', views.article, name='article'),
     path('contact/', views.contact, name='contact'),
     path('thanks/', views.thanks, name='thanks')
 ]

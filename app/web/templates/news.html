@@ -27,7 +27,7 @@ News
 <div class="card-columns">
     {% for article in articles %}
         <div class="card">
-            <a href="{% url 'web:article' id=article.id %}">
+            <a href="{% url 'web:article' slug=article.slug %}">
                 <img class="card-img-top" src="{{ article.image.url }}" alt="Card image cap">
                 <div class="card-body">
                     <h6 class="card-title">{{ article.title }}</h6>

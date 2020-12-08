@@ -26,7 +26,7 @@ SECRET_KEY = 'pw%qon5_$tn636o7b%*-@^pdty=c6le(8k9e(lhauw1-18hvly'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '192.168.100.127']
+ALLOWED_HOSTS = ['localhost', '192.168.100.127', '192.168.15.135']
 
 
 # Application definition
@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.humanize',
     'rest_framework',
     'crispy_forms',
     'core',

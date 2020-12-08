@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %}
 
 
 {% block description %}
@@ -17,28 +18,51 @@ Home
 
 
 {% block content %}
-<div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel" data-interval="2500">
-    <div class="carousel-inner">
-        {% for project in projects %}
-            {% if forloop.first %}
-                <div class="carousel-item active">
-            {% else %}
-                <div class="carousel-item">
-            {% endif %}
-                    <img src="{{ project.image.url }}" class="d-block w-100" alt="...">
-                </div>
-        {% endfor %}
-    </div>
-</div>
-<br>
 <br>
 <div class="container">
     <div class="row">
         <div class="col-sm">
             <h3 style="text-align: center;"><b>Bahrain's leading construction and civil engineering company</b></h3>
+            <h4 style="text-align: center;">We build landmarks, transform cities and shape skylines</h4>
         </div>
     </div>
 </div>
+<br>
+<div class="card-columns">
+    {% for project in projects %}
+        <div class="card">
+            <div class="card-image">
+                <img class="card-img-top" src="{{ project.image.url }}" alt="Card image cap">
+                <div class="image-overlay" disabled>
+                    <p class="overlay-text"><b>{{ project.name }}</b></p>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col-sm">
+            <h5 style="text-align: center;"><b>Latest news</b></h5>
+            <br class="mobile-break">
+        </div>
+    </div>
+</div>
+<div class="card-deck">
+    {% for article in articles %}
+        <div class="card">
+            <a href="{% url 'web:article' slug=article.slug %}">
+                <div class="card-body">
+                    <h6 class="card-title">{{ article.title }}</h6>
+                    <p class="card-text">{{ article.intro }}</p>
+                    <p class="card-text"><small class="text-muted">{{ article.date|date:"M Y" }}</small></p>
+                </div>
+            </a>
+        </div>
+    {% endfor %}
+</div>
+<br>
 <style>
     .navbar {
         margin-bottom: 0px !important;

@@ -4,23 +4,31 @@ from django.core.mail import send_mail
 from random import shuffle
 
 from core.forms import MessageForm
-from core.models import Article, Message, Project
+from core.models import Article, Executive, Message, Project
 
 
 def index(request):
-    projects = Project.objects.filter(homepage=True).order_by('?')
-    return render(request, 'index.html', {'projects': projects})
+    projects = Project.objects.filter(home_page=True).order_by('?')[:6]
+    articles = Article.objects.all().order_by('-date')[:3]
+    return render(
+        request, 'index.html', {'projects': projects, 'articles': articles}
+    )
 
-# def about(request):
+
+def about(request):
+    executives = Executive.objects.all()
+    return render(request, 'about.html', {'executives': executives})
 
 
 def projects(request):
-    projects = Project.objects.all().order_by('-contract_completion')
+    projects = Project.objects.filter(
+        projects_page=True
+    ).order_by('-contract_completion')
     return render(request, 'projects.html', {'projects': projects})
 
 
-def project(request, id):
-    project = Project.objects.get(id=id)
+def project(request, slug):
+    project = Project.objects.get(slug=slug)
     return render(request, 'project.html', {'project': project})
 
 
@@ -29,8 +37,8 @@ def news(request):
     return render(request, 'news.html', {'articles': articles})
 
 
-def article(request, id):
-    article = Article.objects.get(id=id)
+def article(request, slug):
+    article = Article.objects.get(slug=slug)
     return render(request, 'article.html', {'article': article})
 
 

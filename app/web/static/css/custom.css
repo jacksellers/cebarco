@@ -37,13 +37,69 @@ p {
     }
 }
 
-.btn-group {
-    font-size: 1rem;
-    font-weight: 500;
+@media screen and (max-width: 600px)  {
+    .desktop-break { 
+        display: none;
+    }
 }
 
 @media (min-width: 576px) {
     .jumbotron {
         padding: 1rem 0.5rem;
     }
+}
+
+.btn-group {
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.card-image {
+    position: relative;
+  }
+
+.image-overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    transition: .5s ease;
+    background: rgba(0, 0, 0, 0.75);
+}
+
+.card:hover .image-overlay {
+    opacity: 1;
+}
+
+.overlay-text {
+    padding-left: 5%;
+    padding-top: 5%;
+    color: white;
+}
+
+.p-link {
+    color: blue;
+}
+
+.khalid {
+    font-size: smaller;
+}
+
+.footer-icon {
+    margin-right: 10px;
+}
+
+@media (min-width: 576px) {
+    .kar-img {
+        display: flex;
+        justify-content: flex-end;
+    }
+}
+
+.exec-img {
+    padding-bottom: 20px;
 }

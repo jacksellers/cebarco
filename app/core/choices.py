@@ -1,6 +1,7 @@
 CATEGORY = [
     ('building', 'Building'),
-    ('infrastructure', 'Infrastructure')
+    ('infrastructure', 'Infrastructure'),
+    ('motorsport', 'Motorsport')
 ]
 
 CURRENCY = [

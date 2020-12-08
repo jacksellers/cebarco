@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load humanize %}
 
 
 {% block description %}
@@ -20,7 +21,7 @@ Project
 <div class="container">
     <div class="row">
         <div class="col-sm">
-            <h3 style="text-align: center;"><b>{{ project.title }}</b></h3>
+            <h3 style="text-align: center;"><b>{{ project.name }}</b></h3>
         </div>
     </div>
 </div>
@@ -35,6 +36,15 @@ Project
             </div>
         </div>
         <div class="col-sm">
+            <p><b>Client:</b> {{ project.client }}</p>
+            <p><b>Consulting engingeer:</b> {{ project.consulting_engingeer }}</p>
+            <p><b>Contract period:</b> {{ project.contract_period }} months</p>
+            {% if project.contract_price %}
+                <p><b>Contract price:</b> {{ project.contract_price|intcomma }} {{ project.contract_currency }}</p>
+            {% endif %}
+            {% if project.project_manager %}
+                <p><b>Project manager:</b> {{ project.project_manager }}</p>
+            {% endif %}
             <p>{{ project.text|linebreaks }}</p>
         </div>
     </div>
