@@ -9,7 +9,7 @@ python3 -m venv venv
 pip install -r requirements.txt
 cd app
 > keys.py
-nano keys
+nano keys.py
 ```
 Paste the secret key and save the file
 ```
