@@ -130,3 +130,6 @@ dmypy.json
 
 # Images
 media/
+
+# Keys
+keys.py
