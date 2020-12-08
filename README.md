@@ -8,10 +8,10 @@ python3 -m venv venv
 . venv/bin/activate
 pip install -r requirements.txt
 cd app
-> keys.py
-nano keys.py
+> app/keys.py
+nano app/keys.py
 ```
-Paste the secret key and save the file
+Paste the secret key (SECRET_KEY = '...')
 ```
 python manage.py migrate
 python manage.py runserver
