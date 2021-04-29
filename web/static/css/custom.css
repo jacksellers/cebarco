@@ -1,0 +1,136 @@
+a.navbar-brand {
+    display: contents;
+}
+
+.navbar-brand {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+.navbar.bg-white:not(.navbar-transparent) a:not(.dropdown-item):not(.btn) {
+    color: black;
+}
+
+.navbar .navbar-nav .nav-link:not(.btn) {
+    font-size: 0.85em;
+    padding: 0.5rem 1rem;
+}
+
+a {
+    color: black;
+}
+
+a:hover,
+a:focus {
+    color: black;
+    text-decoration: none;
+}
+
+p {
+    color: black;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+@media screen and (min-width: 600px)  {
+    .mobile-break { 
+        display: none;
+    }
+}
+
+@media screen and (max-width: 600px)  {
+    .desktop-break { 
+        display: none;
+    }
+}
+
+.btn-group {
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.card-image {
+    position: relative;
+  }
+
+.image-overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    transition: .5s ease;
+    background: rgba(0, 0, 0, 0.75);
+    border-radius: 0.1875rem;
+}
+
+.card:hover .image-overlay {
+    opacity: 1;
+}
+
+.overlay-text {
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-top: 5%;
+    color: white;
+    font-size: small;
+}
+
+.p-link {
+    color: blue;
+}
+
+.khalid {
+    font-size: smaller;
+}
+
+.footer-icon {
+    margin-right: 10px;
+}
+
+@media screen and (max-width: 600px) {
+    .apps {
+        padding-left: 10px;
+    }
+}
+
+@media (min-width: 600px) {
+    .kar-img {
+        display: flex;
+        justify-content: flex-end;
+    }
+}
+
+.exec-img {
+    padding-bottom: 20px;
+}
+
+.badge-secondary {
+    color: black;
+}
+
+.category-span {
+    white-space: nowrap;
+}
+
+.div-justify {
+    text-align: justify;
+}
+
+.card-col {
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.card {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.btn {
+    padding-left: 15px;
+    padding-right: 15px;
+}

@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% load cropping %}
+
+
+{% block description %}
+
+{% endblock %}
+
+
+{% block title %}
+News
+{% endblock %}
+
+
+{% block head %}
+
+{% endblock %}
+
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-sm">
+            <h3 style="text-align: center;"><b>News</b></h3>
+        </div>
+    </div>
+</div>
+<div class="container-fluid content-row">
+    <div class="row">
+        {% for article in articles %}
+            <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3 py-2 card-col">
+                <div class="card h-100">
+                    <a href="{% url 'web:article' slug=article.slug %}">
+                        <img class="card-img-top" src="{% cropped_thumbnail article 'image_ratio' %}" alt="Card image cap">
+                        <div class="card-body">
+                            <h6 class="card-title">{{ article.title }}</h6>
+                            <div>
+                                <p class="card-text" style="font-size: small;">{{ article.intro }}</p>
+                            </div>
+                            <div class="card-footer">
+                                {{ article.date|date:"d M Y" }}
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

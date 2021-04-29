@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% load static %}
+{% load cropping %}
+
+
+{% block description %}
+
+{% endblock %}
+
+
+{% block title %}
+Home
+{% endblock %}
+
+
+{% block head %}
+
+{% endblock %}
+
+
+{% block content %}
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col-sm">
+            <h3 style="text-align: center;"><b>Bahrain's leading construction and civil engineering company</b></h3>
+            <h4 style="text-align: center;">We build landmarks, transform cities and shape skylines</h4>
+        </div>
+    </div>
+</div>
+<br>
+<div class="container-fluid content-row">
+    <div class="row">
+        {% for project in projects %}
+            <div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-3 card-col">
+                <div class="card">
+                    <a href="{% url 'web:project' slug=project.slug %}">
+                        <img class="card-img-top index-card-img" src="{% cropped_thumbnail project 'image_ratio' %}">
+                        <div class="image-overlay" disabled>
+                            <p class="overlay-text"><b>{{ project.name }}</b></p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col-sm">
+            <h5 style="text-align: center;"><b>Latest news</b></h5>
+            <br>
+        </div>
+    </div>
+</div>
+<div class="container-fluid content-row">
+    <div class="row">
+        {% for article in articles %}
+            <div class="col-sm-12 col-lg-4 py-2 card-col">
+                <div class="card h-100">
+                    <a href="{% url 'web:article' slug=article.slug %}">
+                        <div class="card-body">
+                            <h6 class="card-title">{{ article.title }}</h6>
+                            <p class="card-text">{{ article.intro }}</p>
+                            <p class="card-text"><small class="text-muted">{{ article.date|date:"d M Y" }}</small></p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+<br>
+<style>
+    .navbar {
+        margin-bottom: 0px !important;
+    }
+</style>
+{% endblock %}

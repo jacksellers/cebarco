@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+{% load humanize %}
+{% load markdown %}
+{% load cropping %}
+
+
+{% block description %}
+
+{% endblock %}
+
+
+{% block title %}
+Project
+{% endblock %}
+
+
+{% block head %}
+
+{% endblock %}
+
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-sm">
+            <h3 style="text-align: center;"><b>{{ project.name }}</b></h3>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-sm">
+            <img src="{{ project.image.url }}" class="img-fluid" alt="Responsive image">
+            <br>
+            <br>
+            <div class="google-maps">
+                {{ project.location|safe }}
+            </div>
+        </div>
+        <div class="col-sm">
+            <br class="mobile-break">
+            {% if project.category == 'building' %}
+                <h6>
+                    <span class="badge badge-info">Building <i class="fas fa-building"></i></span>
+                    <span class="badge badge-secondary">Infrastructure <i class="fas fa-wrench"></i></span>
+                    <span class="badge badge-secondary">Motorsport <i class="fas fa-car"></i></span>
+                </h6>
+            {% elif project.category == 'infrastructure' %}
+                <h6>
+                    <span class="badge badge-secondary">Building <i class="fas fa-building"></i></span>
+                    <span class="badge badge-info">Infrastructure <i class="fas fa-wrench"></i></span>
+                    <span class="badge badge-secondary">Motorsport <i class="fas fa-car"></i></span>
+                </h6>
+            {% else %}
+                <h6>
+                    <span class="badge badge-secondary">Building <i class="fas fa-building"></i></span>
+                    <span class="badge badge-secondary">Infrastructure <i class="fas fa-wrench"></i></span>
+                    <span class="badge badge-info">Motorsport <i class="fas fa-car"></i></span>
+                </h6>
+            {% endif %}
+            <p><b>Client:</b> {{ project.client }}</p>
+            <p><b>Consulting engineer:</b> {{ project.consulting_engineer }}</p>
+            <p><b>Period:</b> {{ project.contract_period }} months</p>
+            <p><b>Completion:</b> {{ project.contract_completion|date:"M Y"  }}</p>
+            {% if project.undisclosed %}
+                <p><b>Price:</b> Undisclosed</p>
+            {% else %}
+                <p><b>Price:</b> ${{ project.contract_price|intcomma }}</p>
+            {% endif %}
+            {% if project.project_manager %}
+                <p><b>Project manager:</b> {{ project.project_manager }}</p>
+            {% endif %}
+            <p>{{ project.text|show_markdown }}</p>
+            {% if gallery_images %}
+                <br>
+            {% endif %}
+            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    {% for image in gallery_images %}
+                        {% if forloop.counter == 1 %}
+                            <li data-target="#carouselExampleIndicators" data-slide-to="{{ forloop.counter|add:'-1' }}" class="active"></li>
+                        {% else %}
+                            <li data-target="#carouselExampleIndicators" data-slide-to="{{ forloop.counter|add:'-1' }}"></li>
+                        {% endif %}
+                    {% endfor %}
+                </ol>
+                <div class="carousel-inner">
+                    {% for image in gallery_images %}
+                        <div class="carousel-item{% if forloop.counter == 1 %} active{% endif %}">
+                            <img class="d-block w-100" src="{% cropped_thumbnail image 'image_ratio' %}" alt="First slide">
+                        </div>
+                    {% endfor %}
+                </div>
+                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="sr-only">Next</span>
+                </a>
+            </div>
+            {% for video in gallery_videos %}
+                {{ video.video|safe }}
+                <br>
+                <br>
+            {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+<br>
+{% endblock %}
